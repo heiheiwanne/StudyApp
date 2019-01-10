@@ -32,7 +32,6 @@ public class Main2Activity extends AppCompatActivity {
     private void sendMessage(String string) {
         Message message = new Message();
         message.what =MESSAGE_KEY;
-        message.obj = string;
         sHandler.sendMessage(message);
     }
 }
