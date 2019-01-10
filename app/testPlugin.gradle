@@ -1,0 +1,48 @@
+apply plugin: 'groovy'
+apply plugin: 'java'
+
+dependencies {
+    implementation gradleApi()//gradle sdk
+    implementation localGroovy()//groovy sdk
+    implementation 'com.android.tools.build:gradle:3.2.1'
+}
+
+repositories {
+    jcenter()
+}
+
+
+class Fruit {
+    String clazz
+}
+
+class Apple {
+    String size
+    String weight
+}
+
+class TestPlugin implements Plugin<Project> {
+
+    @Override
+    void apply(Project target) {
+        target.extensions.create("fruit", Fruit)
+        target.extensions.create("apple", Apple)
+
+        target.task('println') << {
+            group "xmq"
+            Fruit fruit = project['address']
+            println fruit.clazz
+            println project['apple'].size
+            println project['apple'].weight
+        }
+    }
+}
+
+apply plugin: TestPlugin
+fruit {
+    clazz "ffff"
+    apple {
+        size "18"
+        weight "888"
+    }
+}
